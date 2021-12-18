@@ -14,8 +14,8 @@ def change_url_base(url_id = 2):
 
 def get_json(href):
     try:
-        # href = url + href + "?TID=" +str(time.time())
-        href = url + href
+        href = url + href + "?TID=" +str(time.time())
+        # href = url + href
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
@@ -28,10 +28,10 @@ def get_json(href):
         return False
 
 
-def download_file(filename, href):
+def download_file(filename):
     try:
-        # href = url + href + "?TID=" +str(time.time())
-        href = url + href
+        href = url + "fix/" + filename + "?TID=" +str(time.time())
+        # href = url + "fix/" + filename
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
@@ -41,10 +41,10 @@ def download_file(filename, href):
         filename = ".log/fix/" + filename
         with open(filename, 'wb') as fn:
             fn.write(r.content)
-        log("href: " + href + "\n" + str(err))
+        log("href: " + href + "\t OK \n" )
         return 0
     except Exception as err:
-        log(err)
+        log("href: " + href + "\n" + str(err))
         print("或许是网络异常")
         return False
 
@@ -54,5 +54,6 @@ if __name__ == "__main__":
     change_url_base()
     json = get_json(href="main.json")
     if json != False:
-        print(json["lady"]["name"])
-        download_file(json["lady"]["name"],json["lady"]["fix_file"])
+        print(json["fix_list"])
+        for k in json["fix_list"]:
+            download_file(json["fix_list"][k]["name"])
