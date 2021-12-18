@@ -1,5 +1,4 @@
 
-from get import change_url_base,get_json
 from msg import msg
 
 def check_ver(json):
@@ -22,6 +21,7 @@ def check_ver(json):
 
 
 if __name__ == "__main__":
+    from get import change_url_base,get_json
     change_url_base(1)
     json = get_json(href="main.json")
     check_ver(json)
