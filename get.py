@@ -14,8 +14,8 @@ def change_url_base(url_id = 2):
 
 def get_json(href):
     try:
-        href = url + href + "?TID=" +str(time.time())
-        # href = url + href
+        href = url + "api/" + href + "?TID=" +str(time.time())
+        # href = url + "api" + href
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
