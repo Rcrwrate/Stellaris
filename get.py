@@ -5,8 +5,8 @@ def change_url_base(url_id = 2):
     global url
     if url_id == 0:
         url = "https://raw.githubusercontent.com/Rcrwrate/Stellaris/main/"
-    elif url_id == "1":
-        url = "https://cdn.jsdelivr.net/gh/Rcrwrate/Stellaris/"
+    elif url_id == 1:
+        url = "https://cdn.jsdelivr.net/gh/Rcrwrate/Stellaris@latest/"
     else:
         url = "https://dl.phantom-sea-limited.ltd/Rcrwrate/Stellaris/main/"
     # log("change_url_base = "+url)
@@ -14,7 +14,8 @@ def change_url_base(url_id = 2):
 
 def get_json(href):
     try:
-        href = url + href + "?TID=" +str(time.time())
+        # href = url + href + "?TID=" +str(time.time())
+        href = url + href
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
@@ -22,7 +23,7 @@ def get_json(href):
         log("href: " + href + "\nmain.json: "+str(r))
         return r
     except Exception as err:
-        log("href: " + href + "\n" + err)
+        log("href: " + href + "\n" + str(err))
         print("或许是网络异常")
         return False
 
@@ -40,7 +41,7 @@ def download_file(filename, href):
         filename = ".log/fix/" + filename
         with open(filename, 'wb') as fn:
             fn.write(r.content)
-        log(filename + "\tOK\n")
+        log("href: " + href + "\n" + str(err))
         return 0
     except Exception as err:
         log(err)
