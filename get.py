@@ -1,5 +1,4 @@
-import requests
-import json
+import requests,json,os,time
 from msg import log
 
 def change_url_base(url_id = 2):
@@ -10,34 +9,49 @@ def change_url_base(url_id = 2):
         url = "https://cdn.jsdelivr.net/gh/Rcrwrate/Stellaris/"
     else:
         url = "https://dl.phantom-sea-limited.ltd/Rcrwrate/Stellaris/main/"
-    log("change_url_base = "+url)
+    # log("change_url_base = "+url)
 
 
 def get_json(href):
-    href = url + href
-    session = requests.Session()
-    session.trust_env = False
-    r = session.get(href)
-    r = json.loads(r.text)
-    log("main.json: "+str(r))
-    return r
+    try:
+        href = url + href + "?TID=" +str(time.time())
+        session = requests.Session()
+        session.trust_env = False
+        r = session.get(href)
+        r = json.loads(r.text)
+        log("href: " + href + "\nmain.json: "+str(r))
+        return r
+    except Exception as err:
+        log("href: " + href + "\n" + err)
+        print("或许是网络异常")
+        return False
 
 
 def download_file(filename, href):
-    href = url + href
-    session = requests.Session()
-    session.trust_env = False
-    r = session.get(href)
-    path = '.log'
-    if not os.path.exists(path):
-        os.makedirs(path)
-    with open(filename, 'wb') as fn:
-        fn.write(r.content)
-    log(filename + "\tOK\n")
-    return 0
+    try:
+        # href = url + href + "?TID=" +str(time.time())
+        href = url + href
+        session = requests.Session()
+        session.trust_env = False
+        r = session.get(href)
+        path = '.log/fix'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        filename = ".log/fix/" + filename
+        with open(filename, 'wb') as fn:
+            fn.write(r.content)
+        log(filename + "\tOK\n")
+        return 0
+    except Exception as err:
+        log(err)
+        print("或许是网络异常")
+        return False
+
 
 
 if __name__ == "__main__":
     change_url_base()
     json = get_json(href="main.json")
-    print(json["lady"]["key"])
+    if json != False:
+        print(json["lady"]["name"])
+        download_file(json["lady"]["name"],json["lady"]["fix_file"])

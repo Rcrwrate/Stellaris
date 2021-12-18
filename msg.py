@@ -1,11 +1,14 @@
 import os
 import time
 
-global version
-version = 0.1
+global main_msg
+main_msg = {
+    "version":"0.1"
+}
+
 
 def msg(key):
-    return version
+    return main_msg[key]
     
 def log(thing):
     i = time.asctime( time.localtime(time.time()) )
@@ -18,4 +21,4 @@ def log(thing):
         
 
 if __name__ == "__main__":
-    log("test")
+    print(msg("version"))

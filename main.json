@@ -1,10 +1,10 @@
 {
     "ver":"0.1",
+    "url":"https://dl.phantom-sea-limited.ltd/Rcrwrate/Stellaris/main/dist/index.exe",
     "used": "True",
     "lady":{
         "key":"1747099270/common/ship_sizes/WG_lady_ship_sizes.txt",
         "fix_file":"fix/WG_lady_ship_sizes.txt",
-        "ori_file":"ori/WG_lady_ship_sizes.txt",
         "name":"WG_lady_ship_sizes.txt"
     }
 }
