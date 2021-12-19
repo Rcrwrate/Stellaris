@@ -76,17 +76,17 @@ def restore_file_cloud(name):
 
 
 if __name__ == "__main__":
-    # from get import *
-    # change_url_base(1)
-    # mod_list = get_json("mod.json")
-    # if mod_list != False:
-    #     for k in mod_list:
-    #         print(mod_list[k]["key"])
-    #         download_file(mod_list[k]["name"])
+    from get import *
+    change_url_base(1)
+    mod_list = get_json("mod.json")
+    if mod_list != False:
+        for k in mod_list:
+            print(mod_list[k]["key"])
+            download_file(mod_list[k]["name"])
 
-    # for i in ["1"]:
-    #     print(check_and_replace(mod_list[i])) 
+    for i in ["1"]:
+        print(check_and_replace(mod_list[i])) 
     
     # restore_file_local("WG_lady_ship_sizes.txt")
 
-    restore_file_cloud(name="WG_lady_ship_sizes.txt")
+    # restore_file_cloud(name="WG_lady_ship_sizes.txt")
