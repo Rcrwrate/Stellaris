@@ -56,7 +56,7 @@ def dir_conf_save():
 if __name__ == "__main__":
     from get import change_url_base,get_json
     change_url_base(1)
-    json = get_json(href="main.json")
+    json = get_json("main.json")
     check_ver(json)
 
-    # print(dir_conf_save())
+    print(dir_conf_save())

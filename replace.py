@@ -25,9 +25,9 @@ def file_ver(path):
 
 
 def save_orinal_file(path,json):
-    name = ".log/.cache/" + json["name"]
-    if not os.path.exists('.log/.cache/'):
-        os.makedirs('.log/.cache/')
+    name = ".log/cache/" + json["name"]
+    if not os.path.exists('.log/cache/'):
+        os.makedirs('.log/cache/')
     with open(path,encoding='utf-8') as f:
         fn = f.readlines()
         with open(name,"w",encoding='utf-8') as f2:
@@ -47,10 +47,10 @@ def replace_file(path,json):
     log("[FILE_REPLACED]:\t" + json["name"] + "\tOK")
 
 
-def restore_file(name):
+def restore_file_local(name):
     path = conf_load("change",name)
     if path != False:
-        ori_file = ".log/.cache/" + str(name)
+        ori_file = ".log/cache/" + str(name)
         try:
             with open(ori_file,encoding='utf-8') as f:
                 fn = f.readlines()
@@ -61,14 +61,26 @@ def restore_file(name):
             log("[ERROR]:\t" + str(err))
             print("恢复失败，请检查日志")
         else:
-            log("[RESTORE]:\t" + str(name) + "\tOK")
+            log("[RESTORE_LOCAL]:\t" + str(name) + "\tOK")
             conf_remove_key("change",name)
+    else:
+        print("{}恢复失败".format(name))
+        log("[ERROR]:\t" + name + "恢复失败")
+        return False
+
+def restore_file_cloud(name):
+    from get import change_url_base,download_file
+    change_url_base()
+    download_file(name,dltype="cache")
+
 
 if __name__ == "__main__":
     # from get import *
-    # change_url_base(url_id = 1)
+    # change_url_base(1)
     # mod_list = get_json("mod.json")
     # for i in ["1"]:
     #     print(check_and_replace(mod_list[i])) 
     
-    restore_file("WG_lady_ship_sizes.txt")
+    # restore_file_local("WG_lady_ship_sizes.txt")
+
+    # restore_file_cloud(name="0")

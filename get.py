@@ -1,7 +1,15 @@
 import requests,json,os,time
 from msg import log
+from conf import conf_set,conf_load
 
-def change_url_base(url_id = 2):
+def change_url_base(url_id=""):
+    if url_id == "":
+        temp = conf_load("setting","url_base")
+        if temp != False:
+            url_id = temp
+        else:
+            url_id = 2
+
     global url
     if url_id == 0:
         url = "https://raw.githubusercontent.com/Rcrwrate/Stellaris/main/"
@@ -10,6 +18,8 @@ def change_url_base(url_id = 2):
     else:
         url = "https://dl.phantom-sea-limited.ltd/Rcrwrate/Stellaris/main/"
     # log("change_url_base = "+url)
+    conf_set("setting","url_base",str(url_id))
+    return url
 
 
 def get_json(name):
@@ -28,17 +38,17 @@ def get_json(name):
         return False
 
 
-def download_file(filename):
+def download_file(filename,dltype="fix"):
     try:
-        href = url + "fix/" + filename + "?TID=" +str(time.time())
-        # href = url + "fix/" + filename
+        href = url + dltype + "/" + filename + "?TID=" +str(time.time())
+        # href = url + dltype + "/" + filename
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
-        path = '.log/fix'
+        path = '.log/' + dltype
         if not os.path.exists(path):
             os.makedirs(path)
-        filename = ".log/fix/" + filename
+        filename = ".log/" + dltype + "/" + filename
         with open(filename, 'wb') as fn:
             fn.write(r.content)
         log("[href]:\t" + href + "\t OK \n" )
