@@ -1,5 +1,4 @@
-from conf import conf_load,conf_set,conf_remove_key
-from msg import log
+from msg import log,conf_load,conf_set,conf_remove_key
 
 def check_and_replace(json):
     name = ".log/fix/" + json["name"]
@@ -72,15 +71,22 @@ def restore_file_cloud(name):
     from get import change_url_base,download_file
     change_url_base()
     download_file(name,dltype="cache")
+    log("[RESTORE_DOWNLOAD]:\t" + str(name) + "\tOK")
+    restore_file_local(name)
 
 
 if __name__ == "__main__":
     # from get import *
     # change_url_base(1)
     # mod_list = get_json("mod.json")
+    # if mod_list != False:
+    #     for k in mod_list:
+    #         print(mod_list[k]["key"])
+    #         download_file(mod_list[k]["name"])
+
     # for i in ["1"]:
     #     print(check_and_replace(mod_list[i])) 
     
     # restore_file_local("WG_lady_ship_sizes.txt")
 
-    # restore_file_cloud(name="0")
+    restore_file_cloud(name="WG_lady_ship_sizes.txt")

@@ -1,12 +1,11 @@
 import requests,json,os,time
-from msg import log
-from conf import conf_set,conf_load
+from msg import log,conf_set,conf_load
 
 def change_url_base(url_id=""):
     if url_id == "":
         temp = conf_load("setting","url_base")
         if temp != False:
-            url_id = temp
+            url_id = int(temp)
         else:
             url_id = 2
 
