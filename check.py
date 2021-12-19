@@ -10,13 +10,13 @@ def check_ver(json):
         if json["ver"] == msg("version"):
             print("您已经更新到最新版本")
         elif json["min_ver"] >= msg("version"):
-            print("最新版本为：{}".format(ver))
+            print("最新版本为：{}".format(json["ver"]))
             print("您的版本为：{}".format(msg("version")))
             print("下载地址：{}".format(json["url"]))
             input("您已经低于版本最低要求，请务必更新，按回车键退出")
             sys.exit(-1)
         else:
-            print("最新版本为：{}".format(ver))
+            print("最新版本为：{}".format(json["ver"]))
             print("您的版本为：{}".format(msg("version")))
             print("下载地址：{}".format(json["url"]))
     else:

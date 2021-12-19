@@ -3,7 +3,7 @@ from msg import log
 
 def conf_set(sec,key,item):
     path = ".log/.ini"
-    if not os.path.exists(path):
+    if not os.path.exists(".log"):
         os.makedirs(".log/")
     conf = configparser.ConfigParser()
     try:
@@ -20,7 +20,7 @@ def conf_set(sec,key,item):
 
 def conf_load(sec,key):
     path = ".log/.ini"
-    if not os.path.exists(path):
+    if not os.path.exists(".log/"):
         os.makedirs(".log/")
     conf = configparser.ConfigParser()
     conf.read(path, encoding="utf-8")
@@ -35,5 +35,5 @@ def conf_load(sec,key):
 
 
 if __name__ == "__main__":
-    # conf_set("Stellaris","dir","D:\Program Files (x86)\Steam\steamapps\workshop\content\\281990\\")
-    print(conf_load("Stellaris2","dir"))
+    conf_set("Stellaris","dir","D:\Program Files (x86)\Steam\steamapps\workshop\content\\281990\\")
+    print(conf_load("Stellaris","dir"))
