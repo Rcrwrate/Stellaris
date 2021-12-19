@@ -29,7 +29,6 @@ def check_dir():
                 return final_dir
     for drive in ['C','D','E','F']:
         path = drive + ":\Program Files (x86)\Steam\steamapps\common\Stellaris"
-        print(path)
         if os.path.exists(path):
             final_dir = drive + ":\Program Files (x86)\Steam\steamapps\workshop\content\\281990\\"
             if os.path.exists(final_dir):
@@ -46,10 +45,14 @@ def check_dir():
 
 #D:\Program Files (x86)\Steam\steamapps\workshop\content\281990
 
+def dir_conf_save():
+    from conf import conf_set
+    conf_set("Stellaris","dir",check_dir())
+
 if __name__ == "__main__":
     # from get import change_url_base,get_json
     # change_url_base(1)
     # json = get_json(href="main.json")
     # check_ver(json)
 
-    print(check_dir())
+    print(dir_conf_save())

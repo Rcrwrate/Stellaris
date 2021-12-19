@@ -23,7 +23,7 @@ def get_json(href):
         log("href: " + href + "\nmain.json: "+str(r))
         return r
     except Exception as err:
-        log("href: " + href + "\n" + str(err))
+        log("[ERROR]:\thref: " + href + "\n" + str(err))
         print("或许是网络异常")
         return False
 
@@ -44,7 +44,7 @@ def download_file(filename):
         log("href: " + href + "\t OK \n" )
         return 0
     except Exception as err:
-        log("href: " + href + "\n" + str(err))
+        log("[ERROR]:\thref: " + href + "\n" + str(err))
         print("或许是网络异常")
         return False
 

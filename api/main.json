@@ -1,19 +1,21 @@
 {
     "ver":"0.1",
-    "url":"/dist/index.exe",
+    "url":"https://dl.phantom-sea-limited.ltd/Rcrwrate/Stellaris/main/dist/index.exe",
     "used": "True",
     "fix_list":{
         "1":{
             "msg":"修复大小姐的冲突问题(建议)",
             "key":"1747099270/common/ship_sizes/WG_lady_ship_sizes.txt",
             "name":"WG_lady_ship_sizes.txt",
-            "ver":"0.1"
+            "ver":"0.1",
+            "require":1747099270
         },
         "2":{
             "msg":"",
             "key":"",
             "name":"WG_lady_ship_sizes.txt",
-            "ver":"0.1"
+            "ver":"0.1",
+            "require":1747099270
         }
 
     }

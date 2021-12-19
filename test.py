@@ -11,12 +11,9 @@ def test():
         for line in fn:
             f.write(line)
 
-def base_dir():
-    global abc
-    abc = 0
+
 
 if __name__ == "__main__":
     dir = input()
-    basedir = base_dir(dir)
     list_dir = os.listdir(basedir)
     print(list_dir)
