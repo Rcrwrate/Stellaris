@@ -7,7 +7,7 @@ def change_url_base(url_id=""):
         if temp != False:
             url_id = int(temp)
         else:
-            url_id = 2
+            url_id = 1
 
     global url
     if url_id == 0:
