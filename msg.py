@@ -3,7 +3,7 @@ import time
 
 global main_msg
 main_msg = {
-    "version":"0.1"
+    "version":0.1
 }
 
 
@@ -21,4 +21,4 @@ def log(thing):
         
 
 if __name__ == "__main__":
-    print(msg("version"))
+    print(type(msg("version")))

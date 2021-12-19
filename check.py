@@ -1,4 +1,4 @@
-import os
+import os,sys
 from msg import msg
 
 def check_ver(json):
@@ -6,11 +6,15 @@ def check_ver(json):
         if json["used"] != "True":
             print("！警告：程序已被禁止使用！")
             input("按回车键退出")
-            import sys
             sys.exit(-1)
-        ver = json["ver"]
-        if ver == msg("version"):
+        if json["ver"] == msg("version"):
             print("您已经更新到最新版本")
+        elif json["min_ver"] >= msg("version"):
+            print("最新版本为：{}".format(ver))
+            print("您的版本为：{}".format(msg("version")))
+            print("下载地址：{}".format(json["url"]))
+            input("您已经低于版本最低要求，请务必更新，按回车键退出")
+            sys.exit(-1)
         else:
             print("最新版本为：{}".format(ver))
             print("您的版本为：{}".format(msg("version")))
@@ -50,9 +54,9 @@ def dir_conf_save():
     conf_set("Stellaris","dir",check_dir())
 
 if __name__ == "__main__":
-    # from get import change_url_base,get_json
-    # change_url_base(1)
-    # json = get_json(href="main.json")
-    # check_ver(json)
+    from get import change_url_base,get_json
+    change_url_base(1)
+    json = get_json(href="main.json")
+    check_ver(json)
 
-    print(dir_conf_save())
+    # print(dir_conf_save())
