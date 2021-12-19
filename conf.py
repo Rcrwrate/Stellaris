@@ -29,11 +29,37 @@ def conf_load(sec,key):
     except configparser.NoSectionError as err:
         print("键值缺失!")
         log("[ERROR]:\t" + str(err))
+        return False
+    except configparser.NoOptionError as err:
+        print("键值缺失!")
+        log("[ERROR]:\t" + str(err))
+        return False
     except Exception as err:
+        log("[ERROR]:\t" + str(err))
         print(".ini文件结构异常! 即将重新进行初始化")
         conf.write(open(path, "w+", encoding="utf-8"))
+        return False
+
+
+def conf_remove_key(sec,key):
+    path = ".log/.ini"
+    if not os.path.exists(".log/"):
+        os.makedirs(".log/")
+    conf = configparser.ConfigParser()
+    conf.read(path, encoding="utf-8")
+    try:
+        conf.remove_option(sec,key)
+        conf.write(open(path, "w+", encoding="utf-8"))
+    except configparser.NoSectionError as err:
+        print("键值缺失!")
+        log("[ERROR]:\t" + str(err))
+        return False
+    except Exception as err:
+        log("[ERROR]:\t" + str(err))
+        print(".ini文件结构异常! 即将重新进行初始化")
+        conf.write(open(path, "w+", encoding="utf-8"))
+        return False
 
 
 if __name__ == "__main__":
-    conf_set("Stellaris","dir","D:\Program Files (x86)\Steam\steamapps\workshop\content\\281990\\")
-    print(conf_load("Stellaris","dir"))
+    conf_remove_key("change","wg_lady_ship_sizes.txt")

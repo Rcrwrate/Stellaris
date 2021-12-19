@@ -12,15 +12,15 @@ def change_url_base(url_id = 2):
     # log("change_url_base = "+url)
 
 
-def get_json(href):
+def get_json(name):
     try:
-        href = url + "api/" + href + "?TID=" +str(time.time())
+        href = url + "api/" + name + "?TID=" +str(time.time())
         # href = url + "api" + href
         session = requests.Session()
         session.trust_env = False
         r = session.get(href)
         r = json.loads(r.text)
-        log("href: " + href + "\nmain.json: "+str(r))
+        log("[href]:\t" + href + "\n" + str(name) + ": \n"+str(r))
         return r
     except Exception as err:
         log("[ERROR]:\thref: " + href + "\n" + str(err))
@@ -41,7 +41,7 @@ def download_file(filename):
         filename = ".log/fix/" + filename
         with open(filename, 'wb') as fn:
             fn.write(r.content)
-        log("href: " + href + "\t OK \n" )
+        log("[href]:\t" + href + "\t OK \n" )
         return 0
     except Exception as err:
         log("[ERROR]:\thref: " + href + "\n" + str(err))
@@ -51,9 +51,9 @@ def download_file(filename):
 
 
 if __name__ == "__main__":
-    change_url_base()
-    json = get_json(href="main.json")
+    change_url_base(1)
+    json = get_json("mod.json")
     if json != False:
-        print(json["fix_list"])
-        for k in json["fix_list"]:
-            download_file(json["fix_list"][k]["name"])
+        for k in json:
+            print(json[k]["key"])
+            download_file(json[k]["name"])
