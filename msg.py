@@ -89,4 +89,4 @@ def conf_remove_key(sec,key):
 
 if __name__ == "__main__":
     conf_init()
-    print(type(msg("version")))
+    print(conf_load("Stellaris","战舰少女r"))

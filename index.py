@@ -12,7 +12,7 @@ def init():
 def main():
     if not os.path.exists(".log"):
         init()
-    change_url_base()
+    change_url_base(2)
     main = get_json("main.json")
     check_ver(main)
 
