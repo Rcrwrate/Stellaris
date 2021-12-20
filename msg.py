@@ -3,7 +3,7 @@ import os,time,configparser
 global main_msg
 main_msg = {
     "version":0.1,
-    "debug":0
+    "debug":1
 }
 
 

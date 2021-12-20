@@ -24,9 +24,10 @@ def change_url_base(url_id=""):
 def get_json(name):
     try:
         href = url + "api/" + name + "?TID=" +str(time.time())
-        # href = url + "api" + href
+        # href = url + "api/" + name
         session = requests.Session()
         session.trust_env = False
+        session.keep_alive = False
         r = session.get(href)
         r = json.loads(r.text)
         log("[href]:\t" + href + "\n" + str(name) + ": \n"+str(r))
@@ -43,6 +44,7 @@ def download_file(filename,dltype="fix"):
         # href = url + dltype + "/" + filename
         session = requests.Session()
         session.trust_env = False
+        session.keep_alive = False
         r = session.get(href)
         path = '.log/' + dltype
         if not os.path.exists(path):

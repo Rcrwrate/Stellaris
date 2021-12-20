@@ -1,4 +1,5 @@
 from msg import log,conf_load,conf_set,conf_remove_key
+import os
 
 def check_and_replace(json):
     name = ".log/fix/" + json["name"]
@@ -8,11 +9,12 @@ def check_and_replace(json):
     if ori == 0.0:
         save_orinal_file(path,json)
         replace_file(path,json)
+        return 1
     elif fix == ori:
-        return False
+        return 0
     else:
         replace_file(path,json)
-        return True
+        return 1
 
 def file_ver(path):
     with open(path,encoding='utf-8') as f:
@@ -58,12 +60,12 @@ def restore_file_local(name):
                         f2.write(line)
         except Exception as err:
             log("[ERROR]:\t" + str(err))
-            print("恢复失败，请检查日志")
+            print("[ERROR]: 恢复失败，请检查日志")
         else:
             log("[RESTORE_LOCAL]:\t" + str(name) + "\tOK")
             conf_remove_key("change",name)
     else:
-        print("{}恢复失败".format(name))
+        print("[ERROR]: {}恢复失败".format(name))
         log("[ERROR]:\t" + name + "恢复失败")
         return False
 
@@ -72,6 +74,7 @@ def restore_file_cloud(name):
     change_url_base()
     download_file(name,dltype="cache")
     log("[RESTORE_DOWNLOAD]:\t" + str(name) + "\tOK")
+    print("[SYSTEM]: 成功拉取云端源文件" + str(name))
     restore_file_local(name)
 
 

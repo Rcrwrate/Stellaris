@@ -12,8 +12,9 @@ def init():
 def main():
     if not os.path.exists(".log"):
         init()
-    change_url_base(2)
+    change_url_base()
     main = get_json("main.json")
+    mod = get_json("mod.json")
     check_ver(main)
 
     inputs = re.split('\\s+', get('>').strip())
@@ -23,11 +24,12 @@ def main():
         elif inputs[0].startswith('i'):
             init()
         elif inputs[0].startswith('a'):
-            analysis(main,conf_load("Stellaris","mods"))
+            analysis(main,conf_load("Stellaris","mods"),mod)
         # elif inputs[0].startswith('r'):
         # elif inputs[0].startswith('i'):
         elif inputs[0].startswith('u'):
             main = get_json("main.json")
+            mod = get_json("mod.json")
             check_ver(main)
         elif inputs[0].startswith('v'):
             print("[SYSTEM]: 当前版本为{}".format(main["ver"]))
