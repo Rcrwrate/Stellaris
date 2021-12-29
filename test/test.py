@@ -12,7 +12,12 @@ def test():
         for line in fn:
             f.write(line)
 
+def test2():
+    global a
+    a = 1
 
+def test3():
+    print(a)
 
 if __name__ == "__main__":
     # dir = input()
