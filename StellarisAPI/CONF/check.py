@@ -1,4 +1,4 @@
-from CONF.ver import main_msg
+from StellarisAPI.CONF.ver import main_msg
 import os
 
 class check():
@@ -28,7 +28,12 @@ class check():
     def dir():
         path = os.getcwd()
         if path.find("Stellaris") != -1:
-            if path.find("Steam") != -1:
+            if path.find("SteamLibrary") != -1:
+                final_dir = str(path.split("SteamLibrary")[0]) + "SteamLibrary\workshop\content\\281990\\"
+                if os.path.exists(final_dir):
+                    print("[SYSTEM]: 已自动识别到Steam群星安装目录，等待联网分析mod列表")
+                    return final_dir
+            elif path.find("Steam") != -1:
                 final_dir = str(path.split("Steam")[0]) + "steamapps\workshop\content\\281990\\"
                 if os.path.exists(final_dir):
                     print("[SYSTEM]: 已自动识别到Steam群星安装目录，等待联网分析mod列表")
@@ -40,9 +45,19 @@ class check():
                 if os.path.exists(final_dir):
                     print("[SYSTEM]: 已自动识别到Steam群星安装目录，等待联网分析mod列表")
                     return final_dir
+        for drive in ['C','D','E','F']:
+            path = drive + ":\SteamLibrary\steamapps\common\Stellaris"
+            if os.path.exists(path):
+                final_dir = drive + ":\SteamLibrary\steamapps\workshop\content\\281990\\"
+                if os.path.exists(final_dir):
+                    print("[SYSTEM]: 已自动识别到Steam群星安装目录，等待联网分析mod列表")
+                    return final_dir
         print("[SYSTEM]: 未能自动识别到您的Steam群星安装目录，请手动输入：\n\t(需要同时包含Steam和Stellaris这俩个关键词)\n\t(可以在Steam库中对群星右键 > 管理 > 浏览本地文件)")
         path = input()
-        final_dir = str(path.split("Steam")[0]) + "Steam\steamapps\workshop\content\\281990\\"
+        if path.find("SteamLibrary") != -1:
+            final_dir = str(path.split("SteamLibrary")[0]) + "SteamLibrary\steamapps\workshop\content\\281990\\"
+        else:
+            final_dir = str(path.split("Steam")[0]) + "Steam\steamapps\workshop\content\\281990\\"
         if os.path.exists(final_dir):
             print("[SYSTEM]: 路径正确，等待联网分析mod列表")
             return final_dir

@@ -1,6 +1,6 @@
-from HTTP.get import HTTP
-from CONF.check import check
-from log import log
+from StellarisAPI.HTTP.get import HTTP
+from StellarisAPI.CONF.check import check
+from StellarisAPI.log import log
 
 if __name__ == "__main__":
     http = HTTP(url_id=1)
