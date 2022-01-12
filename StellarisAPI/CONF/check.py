@@ -1,4 +1,4 @@
-from StellarisAPI.CONF.ver import main_msg
+from StellarisAPI.msg import msg as main_msg
 import os
 
 class check():
