@@ -63,3 +63,8 @@ class check():
             return final_dir
         else:
             print("[ERROR!]: 路径识别失败，请重新识别或寻求开发者帮助")
+    
+    @staticmethod
+    def list_mod(basedir):
+        list_dir = os.listdir(basedir)
+        return list_dir

@@ -20,10 +20,15 @@ class CONF():
 
     def add(self, sec, key, item):
         try:
-            self.CONF.set(sec, key, item)
+            self.CONF.set(sec, key, str(item))
         except configparser.NoSectionError as err:
             self.CONF.add_section(err.section)
-            self.CONF.set(sec, key, item)
+            self.CONF.set(sec, key, str(item))
+        self.add_time(sec)
+
+    def add_time(self, sec):
+        i = time.asctime(time.localtime(time.time()))
+        self.CONF.set(sec, "time", i)
 
     def remove(self, sec, key):
         try:
@@ -35,7 +40,7 @@ class CONF():
 
     def load(self, sec, key):
         try:
-            return self.CONF.get(sec, key)
+            return self.CONF.get(sec, key), self.load_time(sec)
         except configparser.NoSectionError as err:
             # print("键值缺失!")
             self.log("[ERROR]:\t" + str(err))
@@ -44,6 +49,9 @@ class CONF():
             # print("键值缺失!")
             self.log("[ERROR]:\t" + str(err))
             return False
+
+    def load_time(self, sec):
+        return self.CONF.get(sec, "time")
 
     def save(self):
         self.CONF.write(open(PATH, "w+", encoding="utf-8"))
